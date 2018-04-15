@@ -1,0 +1,71 @@
+<h1>Create Posts</h1>
+
+{{#each errors}}
+<div class="alert alert-danger alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Error!</strong> {{message}}
+</div>  
+{{/each}}
+
+<form action="/admin/posts/create" method="post"  enctype="multipart/form-data">
+	 
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="title">Title:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="Enter Title" name="title">
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="file">Upload Photo:</label>
+    <div class="col-sm-10">
+      <input type="file" class="form-control"  name="file">
+    </div>
+  </div>
+
+ <div class="form-group">
+  <label for="status"  class="control-label col-sm-2">Status:</label>
+  <select  name="status"  class=" form-control col-sm-10">
+    <option value="public">Public</option>
+    <option value="private">Private</option>
+    <option value="draft">Draft</option>
+  </select>
+</div>
+
+  <div class="form-group">
+     <label class="control-label col-sm-2" for="allowComments">
+      <input type="checkbox"  name="allowComments">Allow Comments
+    </label>
+ </div>
+
+  <div class="form-group">
+  <label class="control-label col-sm-2">Categories:</label>
+  <select  name="category"  class=" form-control col-sm-10">
+  {{# select post.category}}
+    {{# each categories}}
+    <option value="{{id}}">{{name}}</option>
+    {{/each}}
+ {{/select}}
+  </select>
+</div>
+
+
+
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="body">Body:</label>
+    <div class="col-sm-10">
+      !<textarea id="editor" type="text" class="form-control" cols="30" rows="10"   placeholder="Enter Description" name="body"></textarea>
+    </div>
+  </div>
+
+
+
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Create Post</button>
+    </div>
+  </div>
+	
+</form>
+

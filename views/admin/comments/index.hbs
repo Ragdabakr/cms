@@ -1,0 +1,39 @@
+
+<h2>Comments</h2>
+   <input type="hidden" id="post_id" value="{{post._id}}">
+  <p>Comments for loged in user </p>            
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Owner</th>
+        <th>Approve comments</th>
+        <th>Body</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each comments}}
+      <tr>
+        <td>{{id}}</td>
+        <td>{{user.firstName}}</td>
+         <td> <input data-id="{{id}}"  type="checkbox" name="approveComment" {{#if approveComment}} checked {{/if}}></td>
+
+        <td>{{body}}</td>
+        <td>{{GenerateTime date 'MMMM Do YYYY'}}</td>
+      
+          
+        <td> 
+         
+            
+          <form action="/admin/comment/delete/{{id}}?_method=DELETE"  method="post" >
+            <button class="btn btn-danger" type="submit">Delete</button>
+          </form>
+          
+
+
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>

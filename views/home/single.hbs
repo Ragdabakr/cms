@@ -1,0 +1,106 @@
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+         {{#if success_message}}
+<div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Success!</strong> {{success_message}}
+</div>
+{{/if}}
+<br/>
+     
+
+          <!-- Title -->
+          <h1 class="mt-4">{{post.title}}</h1>
+
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="#">{{user.firstName}}</a>
+          </p>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>Posted in {{GenerateTime date 'MMMM Do YYYY'}}</p>
+
+          <hr>
+
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" src="/uploads/{{post.file}}" alt="">
+
+          <hr>
+
+          <!-- Post Content -->
+          <p class="lead">{{post.body}}</p>
+
+          <blockquote class="blockquote">
+            <p class="mb-0"></p>
+            <footer class="blockquote-footer">Someone famous in
+              <cite title="Source Title">Source Title</cite>
+            </footer>
+          </blockquote>
+
+          <hr>
+         {{#if user}}
+         {{#if post.allowComments}}
+          <!-- Comments Form -->
+          <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form action="/admin/comment" method="post">
+                    <div class="form-group">
+                        <textarea name="body" class="form-control" rows="3"></textarea>
+
+                        <input type="hidden" value="{{post.id}}" name="post_id">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+
+          {{else}}
+          <em>Comments not allow for this post</em>
+          <hr>
+          {{/if}}
+
+          {{else}}
+          <em>You need to login to comment <a href="/login">Login</a></em>
+          <hr>
+
+          {{/if}}
+            
+            {{#each post.comments}}
+          <!-- Single Comment -->
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="{{user.photo}}" style="width:50px; height: 50px;">
+            <div class="media-body">
+              <h5 class="mt-0">{{user.firstName}}</h5>
+                         {{body}}
+            </div>
+          </div>
+               {{/each}}
+
+         </div>
+         
+        <!-- Sidebar Widgets Column -->
+          <!-- Sidebar Widgets Column -->
+
+    {{> home/sidebar}}
+
+  </div>
+
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+   
